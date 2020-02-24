@@ -23,18 +23,14 @@
         z-index: -1;
     }
 
-    .lightrope {
-        background-color: black;
-    }
 
     .blur {
         position: absolute;
-        left: 13px;
         top: 82px;
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: rgb(0, 60, 255);
+        background-color: rgb(255, 0, 0);
         filter: blur(15px);
     }
 </style>
@@ -44,41 +40,7 @@
     </p>
 </div>
 <div class="surface">
-    <div class="blur"></div>
     <canvas id="lightrope" width="665" height="200"></canvas>
 </div>
-<script>
-    const lightrope = document.getElementById('lightrope')
-    const context = lightrope.getContext("2d")
-
-    const lamp = {
-        'x': 35,
-        'y': 100,
-        'line_x': 34,
-        'square_x': 30,
-        'draw': function () {
-            for (light = 0; light < 7; light++) {
-                context.fillStyle = 'red'
-                context.beginPath();
-                context.ellipse(lamp.x, lamp.y, 10, 20, Math.PI / 1, 0, 2 * Math.PI);
-                context.fill();
-
-                context.beginPath();
-                context.strokeStyle = '#4f4f4f'
-                context.lineWidth = 3;
-                context.moveTo(lamp.line_x, 80);
-                context.lineTo(lamp.line_x, 0)
-                context.stroke();
-
-                context.fillStyle = '#343434';
-                context.fillRect(lamp.square_x, 77, 9, 8);
-
-                lamp.square_x += 95
-                lamp.line_x += 95
-                lamp.x += 95
-            }
-        }
-    }
-
-    lamp.draw()
+<script src="lightrope.js">
 </script>
