@@ -43,48 +43,29 @@ for (div = 0; div < 7; div++) {
     x_left += 95
 }
 
-const blur_divs = document.querySelectorAll('.blur')
+
+let blur_px_lightened = 0
 
 
+const change_intensify = (increase, element) => {
 
-for (radius_blur = 0; radius_blur < blur_divs.length; radius_blur++) {
-
-    let div = blur_divs[radius_blur]
-
-    if (radius_blur % 2 != 0) {
-        let lightened = 18.8
-        const change_intensify = setInterval(function () {
-            if (lightened == 3.8) {
-                clearInterval(change_intensify)
-            }
-            div.style.filter = `blur(${lightened}px)`
-            lightened -= 1
-
-        }, 100)
-
-    }
-    else {
-        let lightened = 3.8
-        const change_intensify = setInterval(function () {
-            if (lightened == 18.8) {
-                clearInterval(change_intensify)
-            }
-            div.style.filter = `blur(${lightened}px)`
-            lightened += 1
-
-        }, 100)
+    if (increase == true) {
+        for (blur = 3.8; blur <= 18.8;) {
+            blur += 1
+            element.style.filter = `blur(${blur}px)`
+        }
+    } else {
+        for (blur = 18.8; blur >= 3.8;) {
+            element.style.filter = `blur(${blur}px)`
+        }
     }
 }
 
-
-// const change_intensify = setInterval(function () {
-//     if (blur_px_lightened == 18.8) {
-//         clearInterval(change_intensify)
-//     }
-//     div.style.filter = `blur(${blur_px_lightened}px)`
-//     blur_px_lightened += 1
-
-// }, 5000)
-
-
+const blur_divs = document.querySelectorAll('.blur').forEach((div, index) => {
+    if (index % 2 != 0) {
+        change_intensify(true, div)
+    } else {
+        change_intensify(false, div)
+    }
+})
 
