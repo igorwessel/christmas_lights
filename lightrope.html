@@ -1,0 +1,94 @@
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: white;
+    }
+
+    .logo {
+        text-align: center;
+        margin: 50px;
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+    .surface {
+        width: 665px;
+        position: relative;
+        background-color: black;
+        margin: 0 auto;
+    }
+
+    .lightrope {
+        background-color: black;
+    }
+</style>
+<div class="logo">
+    <p>
+        Christmas Light!
+    </p>
+</div>
+<div class="surface">
+    <canvas id="lightrope" width="665" height="200"></canvas>
+    <!-- <ul class="lightrope">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul> -->
+</div>
+<script>
+    const lightrope = document.getElementById('lightrope')
+    const context = lightrope.getContext("2d")
+
+    const lamp = {
+        'x': 35,
+        'line_x': 34,
+        'square_x': 30
+    }
+
+    for (light = 0; light < 7; light++) {
+
+
+        context.fillStyle = 'red'
+        context.beginPath();
+        context.ellipse(lamp.x, 100, 10, 20, Math.PI / 1, 0, 2 * Math.PI);
+        context.fill();
+
+        context.beginPath();
+        context.strokeStyle = 'blue'
+        context.lineWidth = 3;
+        context.moveTo(lamp.line_x, 80);
+        context.lineTo(lamp.line_x, 0)
+        context.stroke();
+
+        context.fillStyle = 'white';
+        context.fillRect(lamp.square_x, 77, 9, 8);
+
+        lamp.square_x += 95
+        lamp.line_x += 95
+        lamp.x += 95
+    }
+
+    // context.fillStyle = 'red'
+    // context.beginPath();
+    // context.ellipse(35, 100, 10, 20, Math.PI / 1, 0, 2 * Math.PI);
+    // context.fill();
+
+    // context.beginPath();
+    // context.strokeStyle = 'blue'
+    // context.lineWidth = 3;
+    // context.moveTo(34, 80);
+    // context.lineTo(34, 0)
+    // context.stroke();
+
+    // context.fillStyle = 'white';
+    // context.fillRect(30, 77, 9, 8);
+
+</script>
