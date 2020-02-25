@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Light</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="logo">
+        <p>
+            Christmas Light!
+        </p>
+    </div>
+    <div class="explication">
+        <p>Default value for Timer is 500.</p>
+        <p>Default value for Intensity is 0 and dont allow exceed 25.
+            If it exceeds 25, it will use the default value.
+        </p>
+    </div>
+    <div class="options">
+        <label for="timer_input">Timer (milliseconds)</label>
+        <input type="text" id="timer_input" onkeypress="return isNumber(event)">
+        <label for="intensify">Intensity</label>
+        <input type="text" id="intensify_input" onkeypress="return isNumber(event)">
+    </div>
+    <div class="buttons">
+        <button id="play_animation">Play</button>
+    </div>
+    <div class="surface">
+        <canvas id="lightrope" width="665" height="200"></canvas>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.1.0/anime.min.js"></script>
+    <script src="lightrope.js"></script>
+</body>
+
+</html>
