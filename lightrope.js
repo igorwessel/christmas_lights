@@ -1,5 +1,6 @@
 const lightrope = document.getElementById('lightrope')
 const context = lightrope.getContext("2d")
+const button_play = document.getElementById('play_animation')
 
 const lamp = {
     'x': 35,
@@ -28,44 +29,92 @@ const lamp = {
             lamp.x += 95
         }
     },
-}
+    'draw_blur_radius': function () {
+        let x_left = 15
+        for (div = 0; div < 7; div++) {
+            const blur_div = document.createElement('div')
+            document.querySelector('.surface').appendChild(blur_div)
+            blur_div.classList.add('blur')
+            blur_div.classList.add(`blur_${div + 1}`)
 
-lamp.draw()
-
-let x_left = 15
-for (div = 0; div < 7; div++) {
-    const blur_div = document.createElement('div')
-    document.querySelector('.surface').appendChild(blur_div)
-    blur_div.classList.add('blur')
-
-
-    blur_div.style = `left: ${x_left}; filter: blur(${3.8}px);`
-    x_left += 95
-}
-
-
-let blur_px_lightened = 0
-
-
-const change_intensify = (increase, element) => {
-
-    if (increase == true) {
-        for (blur = 3.8; blur <= 18.8;) {
-            blur += 1
-            element.style.filter = `blur(${blur}px)`
-        }
-    } else {
-        for (blur = 18.8; blur >= 3.8;) {
-            element.style.filter = `blur(${blur}px)`
+            if (div % 2 != 0) {
+                blur_div.style = `left: ${x_left}px; filter: blur(18px)`
+            } else {
+                blur_div.style = `left: ${x_left}px;`
+            }
+            x_left += 95
         }
     }
 }
 
-const blur_divs = document.querySelectorAll('.blur').forEach((div, index) => {
-    if (index % 2 != 0) {
-        change_intensify(true, div)
+lamp.draw()
+lamp.draw_blur_radius()
+
+
+// START ANIMATION
+
+
+let animation_decrease_blur = anime({
+    targets: ['.blur_2', '.blur_4', '.blur_6'],
+    keyframes: [
+        { filter: 'blur(18px)' },
+        { filter: 'blur(17px)' },
+        { filter: 'blur(16px)' },
+        { filter: 'blur(15px)' },
+        { filter: 'blur(14px)' },
+        { filter: 'blur(13px)' },
+        { filter: 'blur(12px)' },
+        { filter: 'blur(11px)' },
+        { filter: 'blur(10px)' },
+        { filter: 'blur(9px)' },
+        { filter: 'blur(8px)' },
+        { filter: 'blur(7px)' },
+        { filter: 'blur(6px)' },
+        { filter: 'blur(5px)' },
+    ],
+    direction: 'alternate',
+    duration: 500,
+    autoplay: false,
+    loop: true,
+});
+
+let animation_increase_blur = anime({
+    targets: ['.blur_1', '.blur_3', '.blur_5', '.blur_7'],
+    keyframes: [
+        { filter: 'blur(5px)' },
+        { filter: 'blur(6px)' },
+        { filter: 'blur(7px)' },
+        { filter: 'blur(8px)' },
+        { filter: 'blur(9px)' },
+        { filter: 'blur(10px)' },
+        { filter: 'blur(11px)' },
+        { filter: 'blur(12px)' },
+        { filter: 'blur(13px)' },
+        { filter: 'blur(14px)' },
+        { filter: 'blur(15px)' },
+        { filter: 'blur(16px)' },
+        { filter: 'blur(17px)' },
+        { filter: 'blur(18px)' },
+    ],
+    direction: 'alternate',
+    duration: 500,
+    autoplay: false,
+    loop: true,
+});
+
+
+button_play.addEventListener('click', (event) => {
+
+    event.preventDefault();
+
+    if (button_play.innerText == 'Play') {
+        animation_increase_blur.play();
+        animation_decrease_blur.play();
+        button_play.innerText = 'Stop'
     } else {
-        change_intensify(false, div)
+        animation_increase_blur.pause();
+        animation_decrease_blur.pause();
+        button_play.innerText = 'Play'
     }
 })
 

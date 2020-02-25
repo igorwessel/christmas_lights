@@ -1,57 +1,32 @@
-<style type="text/css">
-    * {
-        margin: 0;
-        padding: 0;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    body {
-        background-color: white;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Light</title>
+    <link rel="stylesheet" href="lightrope.css">
+</head>
 
-    .logo {
-        text-align: center;
-        margin: 50px;
-        font-size: 50px;
-        font-weight: bold;
-    }
+<body>
+    <div class="logo">
+        <p>
+            Christmas Light!
+        </p>
+    </div>
+    <div class="options">
+        <label for="timer_input">Timer</label>
+        <input type="text" id="timer_input">
 
-    .surface {
-        width: 665px;
-        position: relative;
-        background-color: black;
-        margin: 0 auto;
-        z-index: -1;
-    }
+    </div>
+    <div class="buttons">
+        <button id="play_animation">Play</button>
+    </div>
+    <div class="surface">
+        <canvas id="lightrope" width="665" height="200"></canvas>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.1.0/anime.min.js"></script>
+<script src="lightrope.js"></script>
 
-    .timer {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    #timer_input {
-        width: 50px;
-    }
-
-    .blur {
-        position: absolute;
-        top: 82px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: rgb(255, 0, 0);
-    }
-</style>
-<div class="logo">
-    <p>
-        Christmas Light!
-    </p>
-</div>
-<div class="timer">
-    <label for="timer_input">Timer</label>
-    <input type="text" id="timer_input">
-</div>
-<div class="surface">
-    <canvas id="lightrope" width="665" height="200"></canvas>
-</div>
-<script src="lightrope.js">
-</script>
+</html>
