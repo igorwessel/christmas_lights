@@ -46,10 +46,61 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: rgb(255, 0, 0);
+}
+
+.lamp {
+    position: absolute;
+    top: 82px;
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+}
+
+#lamp_1, #blur_1 {
+    background-color: rgb(39, 207, 6)
+}
+
+#lamp_2, #blur_2 {
+    background-color: rgb(4, 40, 240)
+}
+
+#lamp_3, #blur_3 {
+    background-color: rgb(255, 0, 0)
+}
+
+#lamp_4, #blur_4 {
+    background-color: rgb(243, 130, 1)
+}
+
+#lamp_5, #blur_5 {
+    background-color: rgb(39, 207, 6)
+}
+
+#lamp_6, #blur_6 {
+    background-color: rgb(4, 40, 240)
+}
+
+#lamp_7, #blur_7 {
+    background-color: rgb(255, 0, 0)
 }
 
 .explication {
     text-align: center;
     margin-bottom: 25px;
+}
+
+.colors {
+    /* display: inline-block; */
+    margin-top: 10px;
+    text-align: center;
+}
+
+.colors > label {
+    text-align: center;
+}
+
+
+.colors_input {
+    margin-right: 25px;
+    width: 49px;
 }
