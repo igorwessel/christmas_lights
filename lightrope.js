@@ -4,18 +4,18 @@ const timer_input = document.getElementById('timer_input')
 const canvas = document.getElementById('lightrope')
 const context = canvas.getContext('2d')
 
+
 const lamp = {
-    'x': 35,
-    'y': 100,
+    'x_left': 15,
     'line_x': 34,
     'square_x': 30,
-    'draw': function (context) {
-        let light = 0
+    'draw': function () {
         for (light = 0; light < 7; light++) {
-            context.fillStyle = 'red'
-            context.beginPath();
-            context.ellipse(this.x, this.y, 10, 20, Math.PI / 1, 0, 2 * Math.PI);
-            context.fill();
+            const lamp_div = document.createElement('div')
+            document.querySelector('.surface').appendChild(lamp_div)
+            lamp_div.classList.add('lamp')
+            lamp_div.setAttribute('id', `lamp_${light + 1}`)
+            lamp_div.style = `left: ${this.x_left}px`
 
             context.beginPath();
             context.strokeStyle = '#4f4f4f'
@@ -27,9 +27,9 @@ const lamp = {
             context.fillStyle = '#343434';
             context.fillRect(this.square_x, 77, 9, 8);
 
-            lamp.square_x += 95
-            lamp.line_x += 95
-            lamp.x += 95
+            this.x_left += 95
+            this.line_x += 95
+            this.square_x += 95
         }
     },
     'draw_blur_radius': function () {
@@ -67,7 +67,7 @@ const lamp = {
     }
 }
 
-lamp.draw(context)
+lamp.draw()
 lamp.draw_blur_radius()
 lamp.insert_blur()
 
@@ -136,3 +136,20 @@ function isNumber(event) {
         return false
     }
 }
+
+
+const colors = document.querySelectorAll('.colors_input').forEach((input) => {
+    input.addEventListener('change', (event) => {
+
+        let blur = input.getAttribute('id').slice(6)
+        let lamp = input.getAttribute('id').slice(11)
+        const lamp_element = document.getElementById(`lamp_${lamp}`)
+        const blur_element = document.getElementById(blur)
+
+        if (input.value) {
+            anime.set([blur_element, lamp_element], {
+                backgroundColor: `#${input.value}`
+            })
+        }
+    })
+})
