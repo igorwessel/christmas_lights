@@ -2,6 +2,7 @@ const button_play = document.getElementById('play_animation')
 const intensify_input = document.getElementById('intensify_input')
 const timer_input = document.getElementById('timer_input')
 const canvas = document.getElementById('lightrope')
+const surface = document.querySelector('.surface')
 const context = canvas.getContext('2d')
 
 
@@ -12,7 +13,7 @@ const lamp = {
     'draw': function () {
         for (light = 0; light < 7; light++) {
             const lamp_div = document.createElement('div')
-            document.querySelector('.surface').appendChild(lamp_div)
+            surface.appendChild(lamp_div)
             lamp_div.classList.add('lamp')
             lamp_div.setAttribute('id', `lamp_${light + 1}`)
             lamp_div.style = `left: ${this.x_left}px`
@@ -56,47 +57,42 @@ const lamp = {
         radius_blur.forEach((div, index) => {
             if (index % 2 != 0) {
                 anime.set(div, {
-                    filter: `blur(${parseInt(intensify)}px)`
+                    filter: `blur(${parseInt(intensify)}px) brightness(1)`
                 })
             } else {
                 anime.set(div, {
-                    filter: `blur(${parseInt(intensify) + 13}px)`
+                    filter: `blur(${parseInt(intensify) + 13}px) brightness(1.65)`
                 })
             }
         })
+        return [parseInt(intensify), parseInt(intensify) + 13]
     }
 }
 
 lamp.draw()
 lamp.draw_blur_radius()
-lamp.insert_blur()
-
-// ANIMATION
+let intensify = lamp.insert_blur(5)
 
 function create_keyframes(radius, limit) {
-
     let keyframes = []
+    let brightness = 1
 
     if (radius < limit) {
         for (radius; radius <= limit; radius++) {
-            keyframes.push({ filter: `blur(${radius}px)` })
+            keyframes.push({ filter: `blur(${radius}px) brightness(${brightness})` })
+            brightness += .05
         }
     }
     else {
+        brightness = 1.65
         for (radius; radius >= limit; radius--) {
-            keyframes.push({ filter: `blur(${radius}px)` })
+            keyframes.push({ filter: `blur(${radius}px) brightness(${brightness})` })
+            brightness -= .05
         }
     }
     return keyframes
 }
 
-timer_input.addEventListener('change', (event) => {
-    if (timer_input.value) {
-        animation.duration = timer_input.value
-    } else {
-        animation.duration = 500
-    }
-})
 
 
 let animation = anime.timeline({
@@ -107,14 +103,13 @@ let animation = anime.timeline({
     easing: 'linear'
 })
 
-
 animation
     .add({
         targets: ['#blur_2', '#blur_4', '#blur_6'],
-        keyframes: create_keyframes(0, 13)
+        keyframes: create_keyframes(intensify[0], intensify[1])
     }).add({
         targets: ['#blur_1', '#blur_3', '#blur_5', '#blur_7'],
-        keyframes: create_keyframes(13, 0)
+        keyframes: create_keyframes(intensify[1], intensify[0])
     }, `-=${animation.duration}`)
 
 
@@ -129,13 +124,31 @@ button_play.addEventListener('click', (event) => {
 })
 
 
-function isNumber(event) {
-    if (event.key.search(/[\D]/)) {
-        return true
+
+timer_input.addEventListener('change', (event) => {
+    if (timer_input.value) {
+        animation.duration = timer_input.value
     } else {
-        return false
+        animation.duration = 500
     }
-}
+})
+
+
+
+
+const background = document.getElementById('background_black')
+background.addEventListener('click', (event) => {
+    if (background.checked) {
+        anime.set(surface, {
+            backgroundColor: 'black'
+        })
+    } else {
+        anime.set(surface, {
+            backgroundColor: 'white'
+        })
+    }
+})
+
 
 
 const colors = document.querySelectorAll('.colors_input').forEach((input) => {
@@ -153,3 +166,12 @@ const colors = document.querySelectorAll('.colors_input').forEach((input) => {
         }
     })
 })
+
+
+function isNumber(event) {
+    if (event.key.search(/[\D]/)) {
+        return true
+    } else {
+        return false
+    }
+}

@@ -16,17 +16,14 @@
     </div>
     <div class="explication">
         <p>Default value for Timer is 500.</p>
-        <p>Default value for Intensity is 0 and dont allow exceed 25.
-            If it exceeds 25, it will use the default value.
-        </p>
     </div>
     <div class="options">
         <label for="timer_input">Timer (milliseconds)</label>
         <input type="text" id="timer_input" onkeypress="return isNumber(event)">
-        <label for="intensify">Intensity</label>
-        <input type="text" id="intensify_input" onkeypress="return isNumber(event)">
     </div>
     <div class="buttons">
+        <label for="background_black">Background Black</label>
+        <input type="checkbox" name="background_black" id="background_black">
         <button id="play_animation">Play</button>
     </div>
     <div class="surface">
@@ -47,6 +44,9 @@
         <input type="text" class="colors_input" id="color_blur_6" maxlength="6">
         <label for="colors_blur_7">#</label>
         <input type="text" class="colors_input" id="color_blur_7" maxlength="6">
+    </div>
+    <div class="explication" style="margin-top: 35px">
+        <p>Choose the colors for circles.</p>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.1.0/anime.min.js"></script>
     <script src="lightrope.js"></script>
